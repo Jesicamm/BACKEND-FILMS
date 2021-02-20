@@ -1,15 +1,20 @@
-class Film {
+let mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId;
+let Schema = mongoose.Schema;
 
-    constructor(id, title, year, description, image, genre, adult) {
-        this.title = title,
-            this.id = id,
-            this.year = year,
-            this.description = description,
-            this.image = image,
-            this.genre = genre,
-            this.adult = adult
-    }
+let filmSchema = new Schema({
+    title: { type: String },
+    year: { type: Number },
+    country: { type: String },
+    poster: { type: String },
+    seasons: { type: Number },
 
-}
+    genre: {
+        type: String,
+        enum: ['Drama', 'Fantasy', 'Sci-Fi', 'Thriller', 'Comedy']
+    },
+    id: { type: ObjectId },
+    summary: { type: String }
+});
 
-module.exports = Film;
+module.exports = mongoose.model('film', filmSchema);
