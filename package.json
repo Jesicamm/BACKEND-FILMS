@@ -18,6 +18,9 @@
     },
     "homepage": "https://github.com/Jesicamm/BACKEND-PEL-CULAS#readme",
     "dependencies": {
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "mongoose": "^5.11.17",
+        "method-override": "^2.1.2",
+        "body-parser": "^1.5.1"
     }
 }
