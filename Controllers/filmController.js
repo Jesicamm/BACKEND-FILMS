@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const film = require('../Models/film')
+const film = require('../Models/film');
 
 class Film {
     constructor() {
@@ -15,13 +15,13 @@ class Film {
             return film.findOne({ id: id });
         }
         //POST (adding a new film)
-    async addFilm(film) {
-            return film.create(film)
+    async addFilm(movie) {
+            return film.create(movie)
         }
         //PUT (update an existing film)
-    async updateFilm(id, film) {
+    async updateFilm(id, movie) {
             const idFound = film.findOne({ id: id })
-            return idFound.update(film)
+            return idFound.update(movie)
         }
         //DELETE (delete a film by id)
     async deleteFilm({ id: id }) {
