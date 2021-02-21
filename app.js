@@ -1,48 +1,35 @@
-//Requerimos express a una constante.
+//-------------------------Requerimientos desde la raíz-----------------------------------------------------
 
-const express = require('express'),
-    app = express(),
-    http = require("http"),
-    server = http.createServer(app);
-//Requerimos bodyparser & methodOverride (para parsear json y personalizar metodos http)
+const express = require('express')
+const app = express();
+const routerFilms = require('./Routers/routerFilm')
 
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
+//Middlewares
+app.use(express.json());
+app.use(routerFilms);
 
-//requerimos mongoose
+
+
+//------------------Requerimos mongoose y conexion a mongodb-------------------------------------------
 const mongoose = require('mongoose');
+const MONGO_HOST = process.env.MONGO_HOST || 'localhost';
+const MONGO_PORT = process.env.MONGO_PORT || '27017';
+const MONGO_DBNAME = process.env.MONGO_DBNAME || 'videostore';
+const MONGO_USER = process.env.MONGO_USER || null;
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD || null;
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(methodOverride());
+const QUEARY_STRING = MONGO_USER ?
+    `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DBNAME}` :
+    `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DBNAME}`;
 
-const router = express.Router();
-
-router.get('/', function(req, res) {
-    res.send('Hello World')
-});
-
-app.use(router);
-
-
-mongoose.connect('mongodb://localhost/film', { useNewUrlParser: true, useUnifiedTopology: true }, (err, res) => {
-
-    if (err) throw err;
-    console.log('Conected to Database');
+// -----------------------------Conexion to DB---------------------------------------------
+const db = mongoose.connect(QUEARY_STRING, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(console.log('Connected to Database'))
+    .catch((error) => console.log(error));
 
 
-});
-
+//------------------------------Starting Server---------------------------------------------------------
 app.listen(8000, function() {
     console.log("Node server running on http://localhost:8000");
 
 });
-/* mongoose.connect('mongodb://localhost/film', function(err, res) {
-            if (err) {
-                console.log('ERROR: connecting to Database. ' + err);
-            }
-        
-
-            const port = 8000;
-
-            app.listen(port, () => console.log(`Listening at ${port}`)); */

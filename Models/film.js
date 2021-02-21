@@ -1,20 +1,40 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId;
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-let filmSchema = new Schema({
-    title: { type: String },
+
+const filmSchema = new Schema({
+
+    title: {
+        type: String,
+        required: true
+    },
+
     year: { type: Number },
+
+    creationDate: {
+        type: Date,
+        default: new Date
+    },
+
     country: { type: String },
+
     poster: { type: String },
-    seasons: { type: Number },
 
     genre: {
         type: String,
         enum: ['Drama', 'Fantasy', 'Sci-Fi', 'Thriller', 'Comedy']
     },
+
     id: { type: ObjectId },
+
+    adult: {
+        type: Boolean,
+        default: false
+    },
+
     summary: { type: String }
 });
 
-module.exports = mongoose.model('film', filmSchema);
+const film = mongoose.model('film', filmSchema);
+module.exports = film;
