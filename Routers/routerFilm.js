@@ -14,15 +14,16 @@ routerFilms.get('/films', async(req, res) => {
     }
 });
 
-routerFilms.get('/film:id', async(req, res) => {
+routerFilms.get('films/:id', async(req, res) => {
     try {
-        res.json(await filmController.findOne(req))
+        res.json(await filmController.findById(req))
     } catch (err) {
         return res.sendStatus(500).json({
             message: 'Internal Server Error'
         });
     }
 });
+/* routerFilms.get('films/:id', filmController.findById()) */
 
 routerFilms.post('/add-film', async(req, res) => {
     try {

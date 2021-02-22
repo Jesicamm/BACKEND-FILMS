@@ -36,5 +36,15 @@ const filmSchema = new Schema({
     summary: { type: String }
 });
 
+/* filmschema.method("toJSON", function() {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+});
+
+const film = mongoose.model("film", filmschema);
+module.exports = film; */
+
+
 const film = mongoose.model('film', filmSchema);
 module.exports = film;
