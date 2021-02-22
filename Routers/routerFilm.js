@@ -25,12 +25,9 @@ routerFilms.get('/films/:id', (req, res) => {
     })
 })
 
-/* routerFilms.get("/:id", filmController.film_id); */
-
-
 routerFilms.post('/add-film', async(req, res) => {
     try {
-        const id = await filmController.addFilm(new filmSchema(req.body));
+        const id = await filmController.addFilm(req.body);
         const status = 'success';
         res.json({ status, id });
     } catch (error) {
@@ -38,12 +35,13 @@ routerFilms.post('/add-film', async(req, res) => {
             message: 'Internal Server Error'
         });
     }
-})
+});
 
-routerFilms.put('/update-film:id', async(req, res) => {
+
+routerFilms.put('/update-film/:id', async(req, res) => {
     try {
         const id = req.params.id;
-        res.json(await filmController.updateFilm(id, new filmSchema(req.body)));
+        res.json(await filmController.updateFilm(id, req.body));
     } catch (error) {
         return res.sendStatus(500).json({
             message: 'Internal Server Error'
@@ -54,9 +52,8 @@ routerFilms.put('/update-film:id', async(req, res) => {
 routerFilms.delete('/remove-movie/:id', async(req, res) => {
     try {
         const id = req.params.id;
-        const status = 'deleted'
         await filmController.deleteFilm(id);
-        res.json({ status, id });
+        res.json(id)
     } catch (error) {
         return res.sendStatus(500).json({
             message: 'Internal Server Error'

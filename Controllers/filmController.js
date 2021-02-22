@@ -22,12 +22,12 @@ class Film {
         }
         //PUT (update an existing film)
     async updateFilm(id, movie) {
-            const idFound = film.findOne({ id: id })
+            const idFound = film.findOne({ _id: id })
             return idFound.update(movie)
         }
         //DELETE (delete a film by id)
-    async deleteFilm({ id: id }) {
-        const idFound = film.findOne({ id: id })
+    async deleteFilm(id) {
+        const idFound = film.findOne({ _id: id })
         return idFound.remove()
     }
 }
