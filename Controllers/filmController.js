@@ -12,20 +12,10 @@ class Film {
     };
 
     //GET (return a film with id)
-    /* async findById({ id: id }) {
-            return film.findById({ id: id });
-        } */
-
-    async findById(req, res) {
-        try {
-            const something = await Something.findById(req.params.id).exec();
-            res.send(something);
-        } catch (err) {
-            return res.status(500).send({
-                message: err.message
-            })
-        }
+    async findById({ _id: id }) {
+        return film.findOne({ _id: id });
     };
+
     //POST (adding a new film)
     async addFilm(movie) {
             return film.create(movie)
