@@ -11,53 +11,54 @@ const userSchema = new Schema({
         required: true
     },
 
+    surname: {
+        type: String
+            /* required: true */
+    },
+
     birthDate: {
-        type: Number,
-        required: true
+        type: Number
+            /* required: true */
     },
 
     creationDate: {
         type: Date,
-        default: new Date,
-        required: true
+        default: new Date
+            /* required: true */
     },
 
     country: { type: String },
 
     email: {
-        type: String,
-        required: true
+        type: String
+            /*  required: true */
     },
 
     phoneNumber: {
-        type: Number,
-        required: true
+        type: Number
+            /* required: true */
     },
 
     address: {
-        type: String,
-        required: true
+        type: String
+            /* required: true */
     },
 
     personalId: {
-        type: String,
-        required: true
+        type: String
+            /* required: true */
     },
 
     genre: {
         type: String,
-        enum: {
-            "Male": 0,
-            "Female": 1,
-            "Other": 2,
-        }
+        enum: ["Male", "Female"]
     },
 
-    paymentMethod: {
+    /* paymentMethod: {
         type: Number,
         enum: ['visa', 'masterCard', 'paypal', 'bizum'],
         required: true
-    }
+    } */
 });
 
 const user = mongoose.model('user', userSchema);

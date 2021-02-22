@@ -12,8 +12,8 @@ class User {
     };
 
     //GET (return an user with id)
-    async findById({ id: id }) {
-        return user.findOne({ id: id });
+    async findById({ _id: id }) {
+        return user.findOne({ _id: id });
     }
 
     //POST (adding a new user)
@@ -22,12 +22,12 @@ class User {
         }
         //PUT (update an existing user)
     async updateUser(id, perfil) {
-            const idFound = user.findOne({ id: id })
+            const idFound = user.findOne({ _id: id })
             return idFound.update(perfil)
         }
         //DELETE (delete a user by id)
-    async deleteUser({ id: id }) {
-        const idFound = user.findOne({ id: id })
+    async deleteUser(id) {
+        const idFound = user.findOne({ _id: id })
         return idFound.remove()
     }
 }

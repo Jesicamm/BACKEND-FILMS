@@ -14,21 +14,23 @@ routerUser.get('/users', async(req, res) => {
     }
 });
 
-routerUser.get('/user:id', async(req, res) => {
-    try {
-        res.json(await userController.findOne(req))
-    } catch (err) {
-        return res.sendStatus(500).json({
-            message: 'Internal Server Error'
-        });
-    }
-});
+routerUser.get('/users/:id', (req, res) => {
+    userSchema.findById(req.params.id).then((user) => {
+        if (!user) {
+            return res.status(404).send()
+        }
+        res.send(movie);
+
+    }).catch((error) => {
+        res.status(500).send(error)
+    })
+})
 
 routerUser.post('/add-user', async(req, res) => {
     try {
-        const id = await userController.addUser(new userSchema(req.body));
-        const status = 'success';
-        res.json({ status, id });
+        const id = await userController.addUser(req.body);
+
+        res.json(id);
     } catch (error) {
         return res.sendStatus(500).json({
             message: 'Internal Server Error'
@@ -39,7 +41,7 @@ routerUser.post('/add-user', async(req, res) => {
 routerUser.put('/update-user:id', async(req, res) => {
     try {
         const id = req.params.id;
-        res.json(await userController.updateFilm(id, new userSchema(req.body)));
+        res.json(await userController.updateFilm(id, req.body));
     } catch (error) {
         return res.sendStatus(500).json({
             message: 'Internal Server Error'
@@ -50,9 +52,8 @@ routerUser.put('/update-user:id', async(req, res) => {
 routerUser.delete('/remove-user/:id', async(req, res) => {
     try {
         const id = req.params.id;
-        const status = 'deleted'
         await userController.deleteFilm(id);
-        res.json({ status, id });
+        res.json(id);
     } catch (error) {
         return res.sendStatus(500).json({
             message: 'Internal Server Error'

@@ -28,8 +28,7 @@ routerFilms.get('/films/:id', (req, res) => {
 routerFilms.post('/add-film', async(req, res) => {
     try {
         const id = await filmController.addFilm(req.body);
-        const status = 'success';
-        res.json({ status, id });
+        res.json(id);
     } catch (error) {
         return res.sendStatus(500).json({
             message: 'Internal Server Error'

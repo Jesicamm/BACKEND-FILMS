@@ -8,13 +8,12 @@ const routerUser = require('./Routers/routerUser')
 //Middlewares
 app.use(express.json());
 app.use(routerFilms);
-app.use(routerUser)
+app.use(routerUser);
 
 
 
 //------------------Requerimos mongoose y conexion a mongodb-------------------------------------------
 const mongoose = require('mongoose');
-const routerUsers = require('./Routers/routerUser');
 const MONGO_HOST = process.env.MONGO_HOST || 'localhost';
 const MONGO_PORT = process.env.MONGO_PORT || '27017';
 const MONGO_DBNAME = process.env.MONGO_DBNAME || 'videostore';
