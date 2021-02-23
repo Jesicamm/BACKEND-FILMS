@@ -30,6 +30,10 @@ class User {
         const idFound = user.findOne({ _id: id })
         return idFound.remove()
     }
+    async findOneUser(name) {
+        const nameFound = user.findOne({ name: name })
+        return nameFound;
+    }
 }
 
 let userController = new User();
