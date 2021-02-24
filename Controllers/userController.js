@@ -13,7 +13,12 @@ class User {
 
     //GET (return an user with id)
     async findById({ _id: id }) {
-        return user.findOne({ _id: id });
+            return user.findOne({ _id: id });
+        }
+        //Get (return an user by name)
+    async findOneUser(name) {
+        const nameFound = user.findOne({ name: name })
+        return nameFound;
     }
 
     //POST (adding a new user)
@@ -30,10 +35,7 @@ class User {
         const idFound = user.findOne({ _id: id })
         return idFound.remove()
     }
-    async findOneUser(name) {
-        const nameFound = user.findOne({ name: name })
-        return nameFound;
-    }
+
 }
 
 let userController = new User();
