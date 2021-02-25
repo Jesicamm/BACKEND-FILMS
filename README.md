@@ -1,6 +1,6 @@
 # FILMS-API
 
-## AUTOR :girl:: 
+## AUTOR : 
 - [JESSICA MOROCHO MIGUEL](https://github.com/Jesicamm)
 
 ## Introducción:

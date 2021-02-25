@@ -15,6 +15,11 @@ class Film {
     async findById({ _id: id }) {
         return film.findOne({ _id: id });
     };
+    //GET (return a film find by title)
+    async findOneFilm(title) {
+        const titleFound = film.findOne({ title: title })
+        return titleFound;
+    }
 
     //POST (adding a new film)
     async addFilm(movie) {
@@ -27,14 +32,10 @@ class Film {
         }
         //DELETE (delete a film by id)
     async deleteFilm(id) {
-            const idFound = film.findOne({ _id: id })
-            return idFound.remove()
-        }
-        //GET (return a film find by title)
-    async findOneFilm(title) {
-        const titleFound = film.findOne({ title: title })
-        return titleFound;
+        const idFound = film.findOne({ _id: id })
+        return idFound.remove()
     }
+
 }
 
 let filmController = new Film();

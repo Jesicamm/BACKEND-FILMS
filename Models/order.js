@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Types.ObjectId;
-/* const user = require('../Models/user')
-const film = require('../Models/film') */
+
 
 const orderSchema = new Schema({
-    /* id: {
-        type: ObjectId
-    }, */
+
     customerId: {
         type: ObjectId,
         ref: 'user',
